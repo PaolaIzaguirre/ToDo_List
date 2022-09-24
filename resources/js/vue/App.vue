@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="ui two column centered grid">
-            <div class="column cw">
+        <div class="ui grid container">
+            <div class="column seven wide centered cw">
                 <h3>Lista de Quehaceres</h3>
                 <hr>
                 <ToDo></ToDo>

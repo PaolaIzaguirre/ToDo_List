@@ -5,10 +5,10 @@
             <div class="column">
                 <!-- Contenido de la tarjeta -->
                 <div class="ui card">
-                    <div class="content">
-                        <div class="header">
-                            <div class="ui input focus">
-                            <input type="text" placeholder="Tarea...">
+                    <div class="content ui form">
+                        <div class="field">
+                            <div class="field">
+                                <input type="text" placeholder="Tarea..." v-model="task_name">
                             </div>
                         </div>
                         <div class="meta">
@@ -23,3 +23,13 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            task_name: '',
+        };
+    },
+}
+</script>

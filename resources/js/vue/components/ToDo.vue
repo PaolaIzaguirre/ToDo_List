@@ -8,7 +8,8 @@
                     <div class="content ui form">
                         <div class="field">
                             <div class="field">
-                                <input type="text" placeholder="Tarea..." v-model="task_name">
+                                <input type="text" placeholder="Tarea..." v-model="task.task_name">
+                                <input type="hidden" v-model="task.id">
                             </div>
                         </div>
                         <!-- checkbox and button-->
@@ -28,7 +29,10 @@
 export default {
     data() {
         return {
-            task_name: '',
+            task: {
+                task_name: '',
+                id: null,
+            }
         };
     },
 }

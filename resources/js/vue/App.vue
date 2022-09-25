@@ -53,7 +53,6 @@ export default {
     methods: {
         add_task(){
             this.list_task.push({"id_task":0,"name":"", "is_selected":false});
-            console.log(this.list_task);
         },
         delete_all(){
             let token = document.head.querySelector('meta[name="csrf-token"]');
@@ -67,14 +66,15 @@ export default {
             fetch("/delete_all", options)
             .then(response => response.text())
             .then(res => {
-                console.log(res)
                 this.list_task = [];
             });
         },
         save(value){
             this.list_task.find(t => {
-                if(t.id_task == value.id_task){
-                    t = value;
+                if(t.id_task == value[1]){
+                    t['name'] = value[0].name;
+                    t['id_task'] = value[0].id_task;
+                    t['is_selected'] = value[0].is_selected;
                 }
             });
         },

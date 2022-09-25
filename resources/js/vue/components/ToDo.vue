@@ -61,8 +61,8 @@ export default {
             fetch("/save", options)
             .then(response => response.json())
             .then(res => {
-                let info = {"id_task":res.task_id,"is_selected":res.complete,"name":res.name};
-                this.$emit('save_task', info);
+                let info = {"id_task":res[0].task_id,"is_selected":res[0].complete,"name":res[0].name,};
+                this.$emit('save_task', [info,res[1]]);
             });
 
         }

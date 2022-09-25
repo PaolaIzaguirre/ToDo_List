@@ -20,7 +20,7 @@ class TaskController extends Controller
         $task->name=$request->name;
         $task->complete=$request->is_selected;
         $task->save();
-        return response($task);
+        return response()->json([$task, $request->id_task]);
     }
 
     public function delete_all(Request $request){

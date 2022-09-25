@@ -17834,7 +17834,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $props.id_task]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" checkbox and button"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "checkbox",
     "class": "form-check-input",
-    id: "complete",
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $props.is_selected = $event;
     })
@@ -17950,7 +17949,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_img_1600w_PriNvkfDEzU_webp__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "body {\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n}\n\n.cw {\n    background-color: aliceblue;\n    margin-top: 3%;\n    border-radius: 5px;\n    margin-bottom: 3%;\n}\n\n.container-todo {\n    overflow-y: auto;\n    overflow-x: hidden;\n    max-height: 500px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "body {\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    overflow-y: hidden;\n}\n\n.cw {\n    background-color: aliceblue;\n    margin-top: 3%;\n    border-radius: 5px;\n    margin-bottom: 3%;\n}\n\n.container-todo {\n    overflow-y: auto;\n    overflow-x: hidden;\n    max-height: 500px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -14,7 +14,7 @@
                         </div>
                         <!-- checkbox and button-->
                         <div class="form-check ui checkbox">
-                            <input type="checkbox" class="form-check-input" id="complete" v-model="is_selected">
+                            <input type="checkbox" class="form-check-input" v-model="is_selected">
                             <label class="form-check-label" for="complete">Completado</label>
                         </div>
                         <br><br>

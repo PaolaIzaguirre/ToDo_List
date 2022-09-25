@@ -84,11 +84,6 @@ export default {
                 }
             })
             .filter(notUndefined => notUndefined !== undefined);
-            let ids_string = "";
-            console.log(ids)
-            for (let x=0;x<ids.length;x++){
-                ids_string += ids[x] + ',';
-            }
             // Perticion
             let token = document.head.querySelector('meta[name="csrf-token"]');
             const options = {
@@ -97,7 +92,7 @@ export default {
                     "Content-Type": "application/json",
                     'X-CSRF-TOKEN'    : token.content,
                 },
-                body: JSON.stringify(ids_string)
+                body: JSON.stringify({"ids":ids})
             };
             fetch("/delete_complete", options)
             .then(response => response.text())

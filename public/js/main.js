@@ -17522,14 +17522,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).filter(function (notUndefined) {
         return notUndefined !== undefined;
-      });
-      var ids_string = "";
-      console.log(ids);
-
-      for (var x = 0; x < ids.length; x++) {
-        ids_string += ids[x] + ',';
-      } // Perticion
-
+      }); // Perticion
 
       var token = document.head.querySelector('meta[name="csrf-token"]');
       var options = {
@@ -17538,7 +17531,9 @@ __webpack_require__.r(__webpack_exports__);
           "Content-Type": "application/json",
           'X-CSRF-TOKEN': token.content
         },
-        body: JSON.stringify(ids_string)
+        body: JSON.stringify({
+          "ids": ids
+        })
       };
       fetch("/delete_complete", options).then(function (response) {
         return response.text();

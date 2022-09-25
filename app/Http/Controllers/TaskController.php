@@ -28,4 +28,9 @@ class TaskController extends Controller
         $task_avaible = Task::all();
         return response($task_avaible);
     }
+
+    public function dashboard(){
+        $task_avaible = Task::all();
+        return view('dashboard',compact('task_avaible'));
+    }
 }

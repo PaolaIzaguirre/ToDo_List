@@ -102,5 +102,8 @@ export default {
 
         },
     },
+    created() {
+
+    },
 }
 </script>

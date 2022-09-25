@@ -13,15 +13,8 @@
                         </div>
                         <!-- checkbox and button-->
                         <div class="form-check ui checkbox">
-                            <div class="two fields">
-                                <div class="field">
-                                    <input type="checkbox" class="form-check-input" id="complete">
-                                    <label class="form-check-label" for="complete">Completado</label>
-                                </div>
-                                <div class="field">
-                                    <i class="trash red alternate outline icon right floated"></i>
-                                </div>
-                            </div>
+                            <input type="checkbox" class="form-check-input" id="complete">
+                            <label class="form-check-label" for="complete">Completado</label>
                         </div>
                     </div>
                 </div>

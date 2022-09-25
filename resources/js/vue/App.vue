@@ -9,7 +9,7 @@
                             <i class="trash icon"></i>
                             Todas
                         </button>
-                        <button class="ui grey button">
+                        <button class="ui grey button" @click="delete_complete">
                             <i class="trash icon"></i>
                             Completadas
                         </button>
@@ -24,7 +24,9 @@
                     v-for="task in list_task" :key="task.id"
                     :name="task.name"
                     :is_selected="task.is_selected"
-                    :id_task="task.id_task">
+                    :id_task="task.id_task"
+                    @save_task="save"
+                    >
                 </ToDo>
             </div>
         </div>
@@ -44,6 +46,11 @@ export default {
     data() {
         return {
             list_task: [],
+            task_elem: {
+                name: "",
+                id_task: 0,
+                is_selected: false
+            }
         };
     },
     methods: {
@@ -52,8 +59,39 @@ export default {
             console.log(this.list_task);
         },
         delete_all(){
-            this.list_task = []
-        }
+            let token = document.head.querySelector('meta[name="csrf-token"]');
+            const options = {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    'X-CSRF-TOKEN'    : token.content,
+                },
+            };
+            fetch("/delete_all", options)
+            .then(response => response.text())
+            .then(res => {
+                console.log(res)
+                this.list_task = [];
+            });
+        },
+        save(value){
+            this.list_task[value.id_task -1] = value
+        },
+        delete_complete(){
+            let token = document.head.querySelector('meta[name="csrf-token"]');
+            let ids = this.list_task.map(el => {
+                if(el.is_selected){
+                    return el.id_task;
+                }
+            })
+            .filter(notUndefined => notUndefined !== undefined);
+            let ids_string = "";
+            for (let i in ids){
+                ids_string + ids[i] + ',';
+            }
+            ids_string= ids_string.replace(/.$/, ',');
+            console.log(ids_string)
+        },
     },
 }
 </script>

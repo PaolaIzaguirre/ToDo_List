@@ -17477,7 +17477,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      list_task: []
+      list_task: [],
+      task_elem: {
+        name: "",
+        id_task: 0,
+        is_selected: false
+      }
     };
   },
   methods: {
@@ -17490,7 +17495,43 @@ __webpack_require__.r(__webpack_exports__);
       console.log(this.list_task);
     },
     delete_all: function delete_all() {
-      this.list_task = [];
+      var _this = this;
+
+      var token = document.head.querySelector('meta[name="csrf-token"]');
+      var options = {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          'X-CSRF-TOKEN': token.content
+        }
+      };
+      fetch("/delete_all", options).then(function (response) {
+        return response.text();
+      }).then(function (res) {
+        console.log(res);
+        _this.list_task = [];
+      });
+    },
+    save: function save(value) {
+      this.list_task[value.id_task - 1] = value;
+    },
+    delete_complete: function delete_complete() {
+      var token = document.head.querySelector('meta[name="csrf-token"]');
+      var ids = this.list_task.map(function (el) {
+        if (el.is_selected) {
+          return el.id_task;
+        }
+      }).filter(function (notUndefined) {
+        return notUndefined !== undefined;
+      });
+      var ids_string = "";
+
+      for (var i in ids) {
+        ids_string + ids[i] + ',';
+      }
+
+      ids_string = ids_string.replace(/.$/, ',');
+      console.log(ids_string);
     }
   }
 });
@@ -17509,12 +17550,46 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
-    return {};
+    return {
+      task: {}
+    };
   },
   props: {
-    name: '',
-    id_task: null,
-    is_selected: false
+    name: String,
+    id_task: Number,
+    is_selected: Boolean
+  },
+  emits: ['save_task'],
+  methods: {
+    save: function save() {
+      var _this = this;
+
+      this.task = {
+        id_task: this.id_task,
+        name: this.name,
+        is_selected: this.is_selected
+      };
+      var token = document.head.querySelector('meta[name="csrf-token"]');
+      var options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          'X-CSRF-TOKEN': token.content
+        },
+        body: JSON.stringify(this.task)
+      };
+      fetch("/save", options).then(function (response) {
+        return response.json();
+      }).then(function (res) {
+        var info = {
+          "id_task": res.task_id,
+          "is_selected": res.complete,
+          "name": res.name
+        };
+
+        _this.$emit('save_task', info);
+      });
+    }
   }
 });
 
@@ -17560,25 +17635,27 @@ var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 
 var _hoisted_8 = [_hoisted_6, _hoisted_7];
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  "class": "ui grey button"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "trash icon"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Completadas ")], -1
+}, null, -1
 /* HOISTED */
 );
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Completadas ");
+
+var _hoisted_11 = [_hoisted_9, _hoisted_10];
+
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "plus icon"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" nueva ");
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" nueva ");
 
-var _hoisted_12 = [_hoisted_10, _hoisted_11];
+var _hoisted_14 = [_hoisted_12, _hoisted_13];
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", {
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", {
   style: {
     "margin-top": "5%"
   }
@@ -17594,20 +17671,26 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.delete_all && $options.delete_all.apply($options, arguments);
     })
-  }, _hoisted_8), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "ui blue button",
+  }, _hoisted_8), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "ui grey button",
     onClick: _cache[1] || (_cache[1] = function () {
+      return $options.delete_complete && $options.delete_complete.apply($options, arguments);
+    })
+  }, _hoisted_11), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "ui blue button",
+    onClick: _cache[2] || (_cache[2] = function () {
       return $options.add_task && $options.add_task.apply($options, arguments);
     })
-  }, _hoisted_12)])]), _hoisted_13, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.list_task, function (task) {
+  }, _hoisted_14)])]), _hoisted_15, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.list_task, function (task) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ToDo, {
       key: task.id,
       name: task.name,
       is_selected: task.is_selected,
-      id_task: task.id_task
+      id_task: task.id_task,
+      onSave_task: $options.save
     }, null, 8
     /* PROPS */
-    , ["name", "is_selected", "id_task"]);
+    , ["name", "is_selected", "id_task", "onSave_task"]);
   }), 128
   /* KEYED_FRAGMENT */
   ))])])]);
@@ -17664,14 +17747,9 @@ var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_11 = {
   "class": "field"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  "class": "miny ui blue button fluid"
-}, "Guardar")], -1
-/* HOISTED */
-);
-
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Contenedor "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Contenido de la tarjeta "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
@@ -17697,7 +17775,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $props.is_selected]]), _hoisted_8]), _hoisted_9, _hoisted_10, _hoisted_11])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Fin contenido de la tarjeta ")])])]);
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $props.is_selected]]), _hoisted_8]), _hoisted_9, _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[3] || (_cache[3] = function () {
+      return $options.save && $options.save.apply($options, arguments);
+    }),
+    "class": "miny ui blue button fluid"
+  }, "Guardar")])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Fin contenido de la tarjeta ")])])]);
 }
 
 /***/ }),

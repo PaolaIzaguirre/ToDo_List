@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,7 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 });
+
+Route::post('/save', [TaskController::class, 'save']);
+Route::delete('/delete_all', [TaskController::class, 'delete_all']);
+Route::delete('/delete_complete', [TaskController::class, 'delete_complete']);

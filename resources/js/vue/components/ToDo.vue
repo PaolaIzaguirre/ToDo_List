@@ -19,7 +19,7 @@
                         </div>
                         <br><br>
                         <div class="field">
-                            <button class="miny ui blue button fluid">Guardar</button>
+                            <button @click="save" class="miny ui blue button fluid">Guardar</button>
                         </div>
                     </div>
                 </div>
@@ -33,12 +33,39 @@
 export default {
     data() {
         return {
+            task: {},
         };
     },
     props: {
-            name: '',
-            id_task: null,
-            is_selected: false
-    }
+        name: String,
+        id_task: Number,
+        is_selected: Boolean
+    },
+    emits: ['save_task'],
+    methods: {
+        save(){
+            this.task = {
+                id_task : this.id_task,
+                name : this.name,
+                is_selected : this.is_selected
+            }
+            let token = document.head.querySelector('meta[name="csrf-token"]');
+            const options = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    'X-CSRF-TOKEN'    : token.content,
+                },
+                body: JSON.stringify(this.task)
+            };
+            fetch("/save", options)
+            .then(response => response.json())
+            .then(res => {
+                let info = {"id_task":res.task_id,"is_selected":res.complete,"name":res.name};
+                this.$emit('save_task', info);
+            });
+
+        }
+    },
 }
 </script>

@@ -24,7 +24,7 @@ class TaskController extends Controller
     }
 
     public function delete_complete(Request $request){
-        $tasks = Task::whereIn('id',$request->ids);
+        $tasks = Task::whereIn('task_id',$request->ids)->delete();
         $task_avaible = Task::all();
         return response($task_avaible);
     }

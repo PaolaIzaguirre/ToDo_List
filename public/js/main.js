@@ -17549,6 +17549,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }
   },
   beforeCreate: function beforeCreate() {
+    var _this2 = this;
+
     var token = document.head.querySelector('meta[name="csrf-token"]');
     var options = {
       method: "GET",
@@ -17558,16 +17560,27 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }
     };
     fetch("/dashboard", options).then(function (response) {
-      return response.text();
+      return response.json();
     }).then(function (res) {
-      console.log(res);
-
       var _iterator = _createForOfIteratorHelper(res),
           _step;
 
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var task = _step.value;
+          var is_selected = false;
+
+          if (task.complete == 1) {
+            is_selected = true;
+          }
+
+          var task_ = {
+            "name": task.name,
+            "id_task": task.task_id,
+            "is_selected": is_selected
+          };
+
+          _this2.list_task.push(task_);
         }
       } catch (err) {
         _iterator.e(err);

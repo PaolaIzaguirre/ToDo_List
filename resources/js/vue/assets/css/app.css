@@ -4,6 +4,13 @@ body {
 
 .cw {
     background-color: aliceblue;
-    margin-top: 10%;
+    margin-top: 3%;
     border-radius: 5px;
+    margin-bottom: 3%;
+}
+
+.container-todo {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 500px;
 }

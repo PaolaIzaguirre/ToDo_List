@@ -20,14 +20,16 @@
                     </div>
                 </div>
                 <hr style="margin-top:5%">
-                <ToDo
-                    v-for="task in list_task" :key="task.id"
-                    :name="task.name"
-                    :is_selected="task.is_selected"
-                    :id_task="task.id_task"
-                    @save_task="save"
-                    >
-                </ToDo>
+                <div class="container-todo">
+                    <ToDo
+                        v-for="task in list_task" :key="task.id"
+                        :name="task.name"
+                        :is_selected="task.is_selected"
+                        :id_task="task.id_task"
+                        @save_task="save"
+                        >
+                    </ToDo>
+                </div>
             </div>
         </div>
     </div>

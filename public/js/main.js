@@ -17516,7 +17516,6 @@ __webpack_require__.r(__webpack_exports__);
       this.list_task[value.id_task - 1] = value;
     },
     delete_complete: function delete_complete() {
-      var token = document.head.querySelector('meta[name="csrf-token"]');
       var ids = this.list_task.map(function (el) {
         if (el.is_selected) {
           return el.id_task;
@@ -17525,13 +17524,27 @@ __webpack_require__.r(__webpack_exports__);
         return notUndefined !== undefined;
       });
       var ids_string = "";
+      console.log(ids);
 
-      for (var i in ids) {
-        ids_string + ids[i] + ',';
-      }
+      for (var x = 0; x < ids.length; x++) {
+        ids_string += ids[x] + ',';
+      } // Perticion
 
-      ids_string = ids_string.replace(/.$/, ',');
-      console.log(ids_string);
+
+      var token = document.head.querySelector('meta[name="csrf-token"]');
+      var options = {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          'X-CSRF-TOKEN': token.content
+        },
+        body: JSON.stringify(ids_string)
+      };
+      fetch("/delete_complete", options).then(function (response) {
+        return response.text();
+      }).then(function (res) {
+        console.log(res);
+      });
     }
   }
 });

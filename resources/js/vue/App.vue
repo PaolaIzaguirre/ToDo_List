@@ -78,7 +78,6 @@ export default {
             this.list_task[value.id_task -1] = value
         },
         delete_complete(){
-            let token = document.head.querySelector('meta[name="csrf-token"]');
             let ids = this.list_task.map(el => {
                 if(el.is_selected){
                     return el.id_task;
@@ -86,11 +85,26 @@ export default {
             })
             .filter(notUndefined => notUndefined !== undefined);
             let ids_string = "";
-            for (let i in ids){
-                ids_string + ids[i] + ',';
+            console.log(ids)
+            for (let x=0;x<ids.length;x++){
+                ids_string += ids[x] + ',';
             }
-            ids_string= ids_string.replace(/.$/, ',');
-            console.log(ids_string)
+            // Perticion
+            let token = document.head.querySelector('meta[name="csrf-token"]');
+            const options = {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    'X-CSRF-TOKEN'    : token.content,
+                },
+                body: JSON.stringify(ids_string)
+            };
+            fetch("/delete_complete", options)
+            .then(response => response.text())
+            .then(res => {
+                console.log(res)
+            });
+
         },
     },
 }

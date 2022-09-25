@@ -20,7 +20,12 @@
                     </div>
                 </div>
                 <hr style="margin-top:5%">
-                <ToDo v-for="task in list_task"></ToDo>
+                <ToDo
+                    v-for="task in list_task" :key="task.id"
+                    :name="task.name"
+                    :is_selected="task.is_selected"
+                    :id_task="task.id_task">
+                </ToDo>
             </div>
         </div>
     </div>
@@ -43,7 +48,7 @@ export default {
     },
     methods: {
         add_task(){
-            this.list_task.push({"id":this.list_task.length+1,"name":"", "is_selected":false});
+            this.list_task.push({"id_task":this.list_task.length+1,"name":"", "is_selected":false});
             console.log(this.list_task);
         },
         delete_all(){

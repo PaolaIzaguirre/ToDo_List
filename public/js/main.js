@@ -17483,7 +17483,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     add_task: function add_task() {
       this.list_task.push({
-        "id": this.list_task.length + 1,
+        "id_task": this.list_task.length + 1,
         "name": "",
         "is_selected": false
       });
@@ -17509,13 +17509,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
-    return {
-      task: {
-        name: '',
-        id: null,
-        is_selected: false
-      }
-    };
+    return {};
+  },
+  props: {
+    name: '',
+    id_task: null,
+    is_selected: false
   }
 });
 
@@ -17601,9 +17600,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.add_task && $options.add_task.apply($options, arguments);
     })
   }, _hoisted_12)])]), _hoisted_13, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.list_task, function (task) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ToDo);
-  }), 256
-  /* UNKEYED_FRAGMENT */
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ToDo, {
+      key: task.id,
+      name: task.name,
+      is_selected: task.is_selected,
+      id_task: task.id_task
+    }, null, 8
+    /* PROPS */
+    , ["name", "is_selected", "id_task"]);
+  }), 128
+  /* KEYED_FRAGMENT */
   ))])])]);
 }
 
@@ -17655,27 +17661,27 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "text",
     placeholder: "Tarea...",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-      return $data.task.name = $event;
+      return $props.name = $event;
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.task.name]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $props.name]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "hidden",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return $data.task.id = $event;
+      return $props.id_task = $event;
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.task.id]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" checkbox and button"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $props.id_task]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" checkbox and button"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "checkbox",
     "class": "form-check-input",
     id: "complete",
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-      return $data.task.is_selected = $event;
+      return $props.is_selected = $event;
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $data.task.is_selected]]), _hoisted_8])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Fin contenido de la tarjeta ")])])]);
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $props.is_selected]]), _hoisted_8])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Fin contenido de la tarjeta ")])])]);
 }
 
 /***/ }),

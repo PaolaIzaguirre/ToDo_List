@@ -11,7 +11,12 @@ class TaskController extends Controller
 
     }
     public function save(Request $request){
-        $task = new Task;
+        if ($request->id_task == 0) {
+            $task = new Task;
+        }
+        else {
+            $task = Task::findOrFail($request->id_task);
+        }
         $task->name=$request->name;
         $task->complete=$request->is_selected;
         $task->save();

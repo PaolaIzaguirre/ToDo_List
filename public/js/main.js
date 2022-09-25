@@ -17483,18 +17483,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   },
   data: function data() {
     return {
-      list_task: [],
-      task_elem: {
-        name: "",
-        id_task: 0,
-        is_selected: false
-      }
+      list_task: []
     };
   },
   methods: {
     add_task: function add_task() {
       this.list_task.push({
-        "id_task": this.list_task.length + 1,
+        "id_task": 0,
         "name": "",
         "is_selected": false
       });
@@ -17519,7 +17514,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       });
     },
     save: function save(value) {
-      this.list_task[value.id_task - 1] = value;
+      this.list_task.find(function (t) {
+        if (t.id_task == value.id_task) {
+          t = value;
+        }
+      });
     },
     delete_complete: function delete_complete() {
       var _this2 = this;

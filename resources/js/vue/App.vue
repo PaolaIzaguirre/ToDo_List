@@ -46,16 +46,11 @@ export default {
     data() {
         return {
             list_task: [],
-            task_elem: {
-                name: "",
-                id_task: 0,
-                is_selected: false
-            }
         };
     },
     methods: {
         add_task(){
-            this.list_task.push({"id_task":this.list_task.length+1,"name":"", "is_selected":false});
+            this.list_task.push({"id_task":0,"name":"", "is_selected":false});
             console.log(this.list_task);
         },
         delete_all(){
@@ -75,7 +70,11 @@ export default {
             });
         },
         save(value){
-            this.list_task[value.id_task -1] = value
+            this.list_task.find(t => {
+                if(t.id_task == value.id_task){
+                    t = value;
+                }
+            });
         },
         delete_complete(){
             let ids = this.list_task.map(el => {

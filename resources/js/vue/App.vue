@@ -95,12 +95,23 @@ export default {
                 body: JSON.stringify({"ids":ids})
             };
             fetch("/delete_complete", options)
-            .then(response => response.text())
+            .then(response => response.json())
             .then(res => {
-                console.log(res)
+                this.list_task = []
+                this.fill_tasks(res);
             });
 
         },
+        fill_tasks(res){
+            for (let task of res) {
+                let is_selected = false;
+                if(task.complete == 1){
+                    is_selected = true;
+                }
+                let task_ = {"name":task.name, "id_task": task.task_id, "is_selected":is_selected}
+                this.list_task.push(task_);
+            }
+        }
     },
     beforeCreate(){
         let token = document.head.querySelector('meta[name="csrf-token"]');
@@ -114,14 +125,8 @@ export default {
             fetch("/dashboard", options)
             .then(response => response.json())
             .then(res => {
-                for (let task of res) {
-                    let is_selected = false;
-                    if(task.complete == 1){
-                        is_selected = true;
-                    }
-                    let task_ = {"name":task.name, "id_task": task.task_id, "is_selected":is_selected}
-                    this.list_task.push(task_);
-                }
+                this.list_task = []
+                this.fill_tasks(res);
             });
     }
 }

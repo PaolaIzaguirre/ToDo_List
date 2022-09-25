@@ -17522,6 +17522,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       this.list_task[value.id_task - 1] = value;
     },
     delete_complete: function delete_complete() {
+      var _this2 = this;
+
       var ids = this.list_task.map(function (el) {
         if (el.is_selected) {
           return el.id_task;
@@ -17542,26 +17544,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         })
       };
       fetch("/delete_complete", options).then(function (response) {
-        return response.text();
+        return response.json();
       }).then(function (res) {
-        console.log(res);
-      });
-    }
-  },
-  beforeCreate: function beforeCreate() {
-    var _this2 = this;
+        _this2.list_task = [];
 
-    var token = document.head.querySelector('meta[name="csrf-token"]');
-    var options = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        'X-CSRF-TOKEN': token.content
-      }
-    };
-    fetch("/dashboard", options).then(function (response) {
-      return response.json();
-    }).then(function (res) {
+        _this2.fill_tasks(res);
+      });
+    },
+    fill_tasks: function fill_tasks(res) {
       var _iterator = _createForOfIteratorHelper(res),
           _step;
 
@@ -17579,14 +17569,32 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
             "id_task": task.task_id,
             "is_selected": is_selected
           };
-
-          _this2.list_task.push(task_);
+          this.list_task.push(task_);
         }
       } catch (err) {
         _iterator.e(err);
       } finally {
         _iterator.f();
       }
+    }
+  },
+  beforeCreate: function beforeCreate() {
+    var _this3 = this;
+
+    var token = document.head.querySelector('meta[name="csrf-token"]');
+    var options = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        'X-CSRF-TOKEN': token.content
+      }
+    };
+    fetch("/dashboard", options).then(function (response) {
+      return response.json();
+    }).then(function (res) {
+      _this3.list_task = [];
+
+      _this3.fill_tasks(res);
     });
   }
 });

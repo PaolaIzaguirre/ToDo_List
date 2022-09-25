@@ -13,9 +13,8 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/vue/main.js', 'public/js')
+    .js('resources/assets/js/app.js', 'public/js')
     .vue()
-    .copy('node_modules/semantic-ui-css/semantic.min.css','resources/css/semantic.min.css')
-    .copy('node_modules/semantic-ui-css/semantic.min.js','resources/js/semantic.min.js')
     .postCss('resources/css/app.css', 'public/css', [
         //
     ]);

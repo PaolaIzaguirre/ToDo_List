@@ -5,9 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de quehaceres</title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/semantic.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
-    <script src="{{ asset('js/semantic.min.js') }}"></script>
 
 </head>
 <body>

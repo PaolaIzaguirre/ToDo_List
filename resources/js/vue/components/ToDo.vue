@@ -11,11 +11,18 @@
                                 <input type="text" placeholder="Tarea..." v-model="task_name">
                             </div>
                         </div>
-                        <div class="meta">
-                            <span>2 days ago</span>
-                            <a>Animals</a>
+                        <!-- checkbox and button-->
+                        <div class="form-check ui checkbox">
+                            <div class="two fields">
+                                <div class="field">
+                                    <input type="checkbox" class="form-check-input" id="complete">
+                                    <label class="form-check-label" for="complete">Completado</label>
+                                </div>
+                                <div class="field">
+                                    <i class="trash red alternate outline icon right floated"></i>
+                                </div>
+                            </div>
                         </div>
-                        <p></p>
                     </div>
                 </div>
                 <!-- Fin contenido de la tarjeta -->

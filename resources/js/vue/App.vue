@@ -5,7 +5,7 @@
                 <h3>Lista de Quehaceres</h3>
                 <div class="ui column grid">
                     <div class="ui buttons fluid">
-                        <button class="ui black button">
+                        <button class="ui black button" @click="delete_all">
                             <i class="trash icon"></i>
                             Todas
                         </button>
@@ -43,9 +43,12 @@ export default {
     },
     methods: {
         add_task(){
-            this.list_task.push({"id":this.list_task.length+1,"name":""});
+            this.list_task.push({"id":this.list_task.length+1,"name":"", "is_selected":false});
             console.log(this.list_task);
         },
+        delete_all(){
+            this.list_task = []
+        }
     },
 }
 </script>

@@ -8,13 +8,13 @@
                     <div class="content ui form">
                         <div class="field">
                             <div class="field">
-                                <input type="text" placeholder="Tarea..." v-model="task.task_name">
+                                <input type="text" placeholder="Tarea..." v-model="task.name">
                                 <input type="hidden" v-model="task.id">
                             </div>
                         </div>
                         <!-- checkbox and button-->
                         <div class="form-check ui checkbox">
-                            <input type="checkbox" class="form-check-input" id="complete">
+                            <input type="checkbox" class="form-check-input" id="complete" v-model="task.is_selected">
                             <label class="form-check-label" for="complete">Completado</label>
                         </div>
                     </div>
@@ -30,8 +30,9 @@ export default {
     data() {
         return {
             task: {
-                task_name: '',
+                name: '',
                 id: null,
+                is_selected: false
             }
         };
     },

@@ -102,8 +102,23 @@ export default {
 
         },
     },
-    created() {
+    beforeCreate(){
+        let token = document.head.querySelector('meta[name="csrf-token"]');
+            const options = {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    'X-CSRF-TOKEN'    : token.content,
+                },
+            };
+            fetch("/dashboard", options)
+            .then(response => response.text())
+            .then(res => {
+                console.log(res)
+                for (let task of res) {
 
-    },
+                }
+            });
+    }
 }
 </script>

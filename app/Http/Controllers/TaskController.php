@@ -31,6 +31,6 @@ class TaskController extends Controller
 
     public function dashboard(){
         $task_avaible = Task::all();
-        return view('dashboard',compact('task_avaible'));
+        return response($task_avaible);
     }
 }

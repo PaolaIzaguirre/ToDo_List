@@ -14,14 +14,11 @@ use App\Http\Controllers\TaskController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/dashboard', function () {
+Route::get('/', function () {
     return view('dashboard');
 });
-
+Route::get('/dashboard', [TaskController::class, 'dashboard']);
 Route::post('/save', [TaskController::class, 'save']);
 Route::delete('/delete_all', [TaskController::class, 'delete_all']);
 Route::delete('/delete_complete', [TaskController::class, 'delete_complete']);

@@ -17515,10 +17515,10 @@ var _hoisted_1 = {
   "class": "ui grid container"
 };
 var _hoisted_2 = {
-  "class": "column four wide centered cw"
+  "class": "column nine wide centered cw"
 };
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<h3>Lista de Quehaceres</h3><div class=\"ui column grid\"><div class=\"ui buttons\"><button class=\"ui red button\"><i class=\"trash icon\"></i> Todos </button><div class=\"or\"></div><button class=\"ui yellow button\"><i class=\"trash icon\"></i> Completados </button></div></div><hr>", 3);
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<h3>Lista de Quehaceres</h3><div class=\"ui column grid\"><div class=\"ui buttons fluid\"><button class=\"ui red button\"><i class=\"trash icon\"></i> Todas </button><button class=\"ui yellow button\"><i class=\"trash icon\"></i> Completadas </button><button class=\"ui green button\"><i class=\"plus icon\"></i> nueva </button></div></div><hr style=\"margin-top:5%;\">", 3);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_ToDo = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ToDo");
@@ -17547,7 +17547,7 @@ var _hoisted_2 = {
   "class": "column"
 };
 var _hoisted_3 = {
-  "class": "ui card"
+  "class": "ui card fluid"
 };
 var _hoisted_4 = {
   "class": "content ui form"

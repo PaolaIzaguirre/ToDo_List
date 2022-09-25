@@ -4,7 +4,7 @@
         <div class="ui one column centered grid">
             <div class="column">
                 <!-- Contenido de la tarjeta -->
-                <div class="ui card">
+                <div class="ui card fluid">
                     <div class="content ui form">
                         <div class="field">
                             <div class="field">

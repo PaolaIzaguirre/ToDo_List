@@ -1,22 +1,25 @@
 <template>
     <div>
         <div class="ui grid container">
-            <div class="column four wide centered cw">
+            <div class="column nine wide centered cw">
                 <h3>Lista de Quehaceres</h3>
                 <div class="ui column grid">
-                    <div class="ui buttons">
+                    <div class="ui buttons fluid">
                         <button class="ui red button">
                             <i class="trash icon"></i>
-                            Todos
+                            Todas
                         </button>
-                        <div class="or"></div>
                         <button class="ui yellow button">
                             <i class="trash icon"></i>
-                            Completados
+                            Completadas
+                        </button>
+                        <button class="ui green button">
+                            <i class="plus icon"></i>
+                            nueva
                         </button>
                     </div>
                 </div>
-                <hr>
+                <hr style="margin-top:5%">
                 <ToDo></ToDo>
             </div>
         </div>
